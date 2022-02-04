@@ -10,7 +10,7 @@ function Home() {
   const messagesMap = {
     error: <MessageModel color='red' header='Error' description='Sorry something happened' />,
     noItems: <MessageModel color='yellow' header='Sorry' description="We can't find the search" />,
-    welcome: <MessageModel color='gray' header='Welcome' description='Please enter the text in the search box and click on the button' />,
+    welcome: <MessageModel color='grey' header='Welcome' description='Please enter the text in the search box and click on the button' />,
   }
   return (
     <>

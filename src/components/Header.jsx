@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Input, Menu, Button } from 'semantic-ui-react';
+import { Input, Menu, Dimmer, Loader } from 'semantic-ui-react';
 import { Header as HeaderSemantic } from 'semantic-ui-react';
-export default function Header({ setItems, setMessage}) {
+export default function Header({ setItems, setMessage }) {
 
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +19,7 @@ export default function Header({ setItems, setMessage}) {
       .then((response) => {
         setIsLoading(false);
         setItems(response.data.results);
-        if (response.data.results.length === 0) 
+        if (response.data.results.length === 0)
           setMessage('noItems')
       })
       .catch((error) => {
@@ -38,17 +38,30 @@ export default function Header({ setItems, setMessage}) {
 
   return (
     <div>
-      <Menu stackable>
+      <Menu color="teal" inverted stackable>
         <Menu.Item >
-          <HeaderSemantic size='large' as='h1'>iTunes content finder</HeaderSemantic>
+          <HeaderSemantic inverted size='large' as='h1'>iTunes content finder</HeaderSemantic>
         </Menu.Item>
         <Menu.Item position='right'>
-          <Input loading={isLoading} className='search' placeholder='Search' value={search} onChange={handleChange} />
+          <Dimmer active={isLoading} inverted>
+            <Loader />
+          </Dimmer>
+          <Input action={{
+            color: 'blue',
+            icon: 'search',
+            onClick: HandleSearch,
+          }}
+            actionPosition='right'
+            placeholder='Search...'
+            conPosition='left'
+            value={search}
+            onChange={handleChange}
+          />
+
+
         </Menu.Item>
-        <Menu.Item>
-          <Button icon='search' onClick={HandleSearch} />
-        </Menu.Item>
+
       </Menu>
-    </div>
+    </div >
   );
 }
