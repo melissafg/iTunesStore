@@ -1,66 +1,62 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Input, Menu, Select, Button } from 'semantic-ui-react';
+import { Input, Menu, Button } from 'semantic-ui-react';
+import { Header as HeaderSemantic } from 'semantic-ui-react';
 const styleLink = document.createElement("link");
 styleLink.rel = "stylesheet";
 styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
 document.head.appendChild(styleLink);
-export default function Home() {
-  const [item, setItem] = useState([]);
-  const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("all");
+export default function Header({ setItems, setError}) {
 
+  const [search, setSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const baseURL = "https://itunes.apple.com/search";
 
-  const getItem = async () => {
+  const HandleSearch = async () => {
+    setIsLoading(true);
     await axios
       .get(baseURL, {
         params: {
           term: search,
-          media: filter,
         },
       })
       .then((response) => {
-        setItem(response.data.results);
-        setSearch(response.data.results);
+        setIsLoading(false);
+        setError(false);
+        if (response.data.results.length > 0) {
+          setItems(response.data.results);
+        } else {
+          setItems("NotItems");
+        }
+
       })
       .catch((error) => {
+        setError(true);
+        setIsLoading(false);
         console.log(error);
+
       });
   };
+
 
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
 
-  const handleAttributeChange = (event) => {
-    setFilter(event.target.value);
-  };
-  const options = [
-    { key: 1, value: 'all', text: 'All' },
-    { key: 2, value: 'music', text: 'Music' },
-    { key: 3, value: 'movie', text: 'Movie' },
-    { key: 4, value: 'podcast', text: 'Podcast' },
-    { key: 5, value: 'musicVideo', text: 'Music Video' },
-    { key: 6, value: 'audiobook', text: 'Audiobook' },
-    { key: 7, value: 'tvShow', text: 'Tv Show' },
-    { key: 8, value: 'software', text: 'Software' },
-    { key: 9, value: 'shortFilm', text: 'Short Film' },
-  ]
-  return  (
-    <Menu>
-      <h2>
-      iTunes content finder
-      </h2>
-      <Menu.Item position='right'>
-        <Input className='search' placeholder='Search' value={search} onChange={handleChange}/>
-      </Menu.Item>
-      <Menu.Item >
-      <Select placeholder='Select your country' options={options} onChange={handleAttributeChange} />
-      </Menu.Item>
-      <Menu.Item>
-      <Button icon='search' onClick={() => getItem() }/>
-      </Menu.Item>
-    </Menu>
+
+  return (
+    <div>
+      <Menu stackable>
+        <Menu.Item >
+          <HeaderSemantic size='large' as='h1'>iTunes content finder</HeaderSemantic>
+        </Menu.Item>
+        <Menu.Item position='right'>
+          <Input loading={isLoading} className='search' placeholder='Search' value={search} onChange={handleChange} />
+        </Menu.Item>
+        <Menu.Item>
+          <Button icon='search' onClick={HandleSearch} />
+        </Menu.Item>
+      </Menu>
+    </div>
   );
 }
