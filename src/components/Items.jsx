@@ -1,9 +1,5 @@
 import React from 'react';
 import { Card, Grid, Icon, Image } from 'semantic-ui-react'
-const styleLink = document.createElement("link");
-styleLink.rel = "stylesheet";
-styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
-document.head.appendChild(styleLink);
 
 function millisToMinutesAndSeconds(millis) {
   var minutes = Math.floor(millis / 60000);
