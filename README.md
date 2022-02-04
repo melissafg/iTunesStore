@@ -1,3 +1,9 @@
+## About
+This project uses the iTunes API https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/
+It was built in React with Semantic UI version 2.1.1 (https://react.semantic-ui.com/), Nodejs version 16.13.2 and npm version 7.5.6
+
+The updated code with all the changes is found in Pull Request from the develop branch to the main
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -13,11 +19,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `yarn build`
 
