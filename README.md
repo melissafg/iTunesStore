@@ -1,6 +1,6 @@
 ## About
-This project uses the iTunes API https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/
-It was built in React with Semantic UI version 2.1.1 (https://react.semantic-ui.com/), Nodejs version 16.13.2 and npm version 7.5.6
+This project uses the [iTunes API](https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/)
+It was built in React with[Semantic UI](https://react.semantic-ui.com/) version 2.1.1, Nodejs version 16.13.2 and npm version 7.5.6
 
 The updated code with all the changes is found in Pull Request from the develop branch to the main
 
