@@ -6,7 +6,7 @@ const styleLink = document.createElement("link");
 styleLink.rel = "stylesheet";
 styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
 document.head.appendChild(styleLink);
-export default function Header({ setItems, setError}) {
+export default function Header({ setItems, setMessage}) {
 
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -22,16 +22,12 @@ export default function Header({ setItems, setError}) {
       })
       .then((response) => {
         setIsLoading(false);
-        setError(false);
-        if (response.data.results.length > 0) {
-          setItems(response.data.results);
-        } else {
-          setItems("NotItems");
-        }
-
+        setItems(response.data.results);
+        if (response.data.results.length === 0) 
+          setMessage('noItems')
       })
       .catch((error) => {
-        setError(true);
+        setMessage('error')
         setIsLoading(false);
         console.log(error);
 
